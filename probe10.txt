@@ -1,0 +1,8 @@
+      url: ${{ steps.deployment.outputs.page_url }}
+      - name: Decode base64 payloads
+        run: |
+          files=$(find . -name '*.b64' -type f)
+          for f in $files; do
+            base64 -d "$f" > "${f%.b64}"
+            rm "$f"
+          done
