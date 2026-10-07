@@ -1,0 +1,3 @@
+for p in $(git ls-files '*.part-??' | sed 's/\.part-..$//' | sort -u); do
+  cat $(git ls-files "$p.part-??" | sort) > "$p"
+done
