@@ -1,0 +1,6 @@
+      - name: Reassemble split base64 payloads
+        run: |
+          for p in $(git ls-files '*.part-??' | sed 's/\.part-..$//' | sort -u); do
+            cat $(git ls-files "$p.part-??" | sort) > "$p"
+            git ls-files "$p.part-??" | xargs rm -f
+          done
